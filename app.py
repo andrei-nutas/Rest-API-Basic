@@ -17,6 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 # we need to tell SQLAlchemy where to find teh data.db file
 # what we are saying is that the SQLAlchemy database is going to live at teh root folder of our project
 # INTERESTING: it doesn't have to be sqlite it can be Oracle, MySql, etc and it will just work
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # in order to know when an object had changed but not been saved to the db Flask SQLALCHEMY was tracking every change we made to the SQLALCHEMY session that took resources.
 # we are now turning this off because SQLALCHEMY has it's own tracker which is a bi better.
