@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import  Api
 from flask_jwt import JWT
@@ -11,7 +13,7 @@ from resources.store import Store, StoreList
 # a resource is just a thing that our Api can return and create, they are usually mapped in database tables as well
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 # we need to tell SQLAlchemy where to find teh data.db file
 # what we are saying is that the SQLAlchemy database is going to live at teh root folder of our project
 # INTERESTING: it doesn't have to be sqlite it can be Oracle, MySql, etc and it will just work
