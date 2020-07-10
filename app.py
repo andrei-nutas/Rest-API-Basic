@@ -8,9 +8,6 @@ from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
 
-from db import db
-
-
 # a resource is just a thing that our Api can return and create, they are usually mapped in database tables as well
 
 app = Flask(__name__)
@@ -32,11 +29,7 @@ api = Api(app)
 # the api works with resources and every resource has to be a class
 # the new classes must inherit at some point down the inheretence line from the class Resource
 
-@app.before_first_request
-#this will affect the method below it and it will run it before the first request into this app
-def create_tables():
-    db.create_all()
-# this will create all the tables unless they exist already 
+
 
 jwt = JWT(app, authenticate, identity) # /auth
 
@@ -51,6 +44,7 @@ api.add_resource(UserRegister, '/register')
 # in essence it tells our server that the Item resource can be accesed from this endpoint: http://127.0.0.1:5000/item/Pen
 
 if __name__ == '__main__':
+    from db import db
     db.init_app(app)
     app.run(port = 5000)
 # we use this so the app doesn't run if we end up importing app in app.py in any other file
